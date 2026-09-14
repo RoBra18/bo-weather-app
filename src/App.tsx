@@ -1,122 +1,49 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useMemo, useState } from 'react';
+import { Footer } from './components/layout/Footer';
+import { Header } from './components/layout/Header';
+import { CitySearch } from './features/cities/components/CitySearch';
+import { ForecastList } from './features/forecast/components/ForecastList';
+import { useBoliviaForecast } from './features/forecast/hooks/useForecast';
+import { CurrentWeatherCard } from './features/weather/components/CurrentWeatherCard';
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+  const [selectedCityId, setSelectedCityId] = useState<string>('cochabamba');
+  const [unit, setUnit] = useState<'C' | 'F'>('C');
+
+  // Consume el servicio existente a través del custom hook del dominio
+  const { data } = useBoliviaForecast();
+
+  // Obtiene el pronóstico de la ciudad seleccionada
+  const selectedForecast = useMemo(() => {
+    if (!data || data.length === 0) return null;
+    return data.find((item) => item.city.id === selectedCityId) || data[0];
+  }, [data, selectedCityId]);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="bg-background font-body-md text-on-surface min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+      <Header unit={unit} onUnitChange={setUnit} />
 
-      <div className="ticks"></div>
+      <main className="w-full pt-16 flex-1 bg-surface">
+        <div className="max-w-[1140px] mx-auto px-margin-mobile md:px-margin py-8 md:py-12 flex flex-col gap-10">
+          {/* Tarjeta del clima actual de la ciudad seleccionada */}
+          <CurrentWeatherCard cityForecast={selectedForecast} unit={unit} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          {/* Selector e información de las 9 ciudades capitales */}
+          <CitySearch
+            allForecasts={data}
+            selectedCityId={selectedCityId}
+            onSelectCity={setSelectedCityId}
+            unit={unit}
+          />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+          {/* Lista del pronóstico de 7 días */}
+          <ForecastList cityForecast={selectedForecast} unit={unit} />
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;

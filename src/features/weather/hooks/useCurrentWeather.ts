@@ -1,12 +1,10 @@
-import type { CurrentWeather } from '../../../types/weather';
+import { useCityForecast } from '../../forecast/hooks/useForecast';
+import type { City } from '../../../types/city';
 
 /**
- * Custom hook para la gestión del estado del clima actual.
+ * Custom hook para la gestión del clima actual de una ciudad.
  */
-export function useCurrentWeather(_cityQuery?: string) {
-  const weather: CurrentWeather | null = null;
-  const loading = false;
-  const error: string | null = null;
-
-  return { weather, loading, error };
+export function useCurrentWeather(city: City | null) {
+  const { forecast, loading, error } = useCityForecast(city);
+  return { weather: forecast, loading, error };
 }
