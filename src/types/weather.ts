@@ -9,7 +9,20 @@ export interface WeatherCondition {
 }
 
 /**
- * Representación a nivel de aplicación del pronóstico diario de 7 días.
+ * Datos observados del clima actual en tiempo real provenientes de Open-Meteo.
+ */
+export interface CurrentWeather {
+  temp: number;
+  feelsLike: number;
+  humidity: number;
+  windSpeed: number;
+  weatherCode: number;
+  weatherCondition: WeatherCondition;
+  time?: string;
+}
+
+/**
+ * Representación a nivel de aplicación del pronóstico diario para 7 días.
  */
 export interface DailyForecast {
   date: string;
@@ -17,7 +30,5 @@ export interface DailyForecast {
   minTemp: number;
   weatherCode: number;
   weatherCondition: WeatherCondition;
-  humidity?: number;
-  windSpeed?: number;
-  precipitationProbability?: number;
+  precipitationProbability: number;
 }

@@ -8,7 +8,7 @@ export interface CurrentWeatherCardProps {
 }
 
 export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, unit }) => {
-  if (!cityForecast || !cityForecast.forecast || cityForecast.forecast.length === 0) {
+  if (!cityForecast || !cityForecast.current || !cityForecast.forecast || cityForecast.forecast.length === 0) {
     return (
       <section className="w-full bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-sm border border-surface-container-low flex items-center justify-center min-h-[300px]">
         <div className="flex flex-col items-center gap-3 text-on-surface-variant">
@@ -19,18 +19,14 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
     );
   }
 
-  const { city, forecast, currentHumidity, currentWindSpeed } = cityForecast;
+  const { city, current, forecast } = cityForecast;
   const today = forecast[0];
-  const iconMeta = getWeatherIconMeta(today.weatherCode);
+  const iconMeta = getWeatherIconMeta(current.weatherCode);
 
+  const displayCurrentTemp = formatTemp(current.temp, unit);
+  const displayFeelsLike = formatTemp(current.feelsLike, unit);
   const displayMax = formatTemp(today.maxTemp, unit);
   const displayMin = formatTemp(today.minTemp, unit);
-  const currentEstimate = Math.round((displayMax + displayMin) / 2);
-  const feelsLike = currentEstimate > 0 ? currentEstimate + 1 : currentEstimate;
-
-  const humidityDisplay = currentHumidity ?? today.humidity ?? 50;
-  const windDisplay = currentWindSpeed ?? today.windSpeed ?? 12;
-  const precipDisplay = today.precipitationProbability ?? 0;
 
   // Formato de fecha legible
   const dateFormatted = new Date().toLocaleDateString('es-BO', {
@@ -68,7 +64,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
         <div className="flex items-center gap-5">
           <div className="flex items-baseline gap-1">
             <span className="font-display-hero text-display-hero text-on-surface tracking-tighter" id="hero-temp">
-              {currentEstimate}
+              {displayCurrentTemp}
             </span>
             <span className="text-[32px] text-primary font-semibold">°{unit}</span>
           </div>
@@ -78,7 +74,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
                 {iconMeta.iconName}
               </span>
               <span className="font-headline-md text-headline-md text-on-surface" id="hero-condition-text">
-                {today.weatherCondition.main}
+                {current.weatherCondition.main}
               </span>
             </div>
             <div className="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
@@ -93,7 +89,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
               </span>
               <span className="mx-1 text-outline-variant">•</span>
               <span>
-                Sensación <strong className="text-on-surface font-semibold" id="hero-feels-like">{feelsLike}°{unit}</strong>
+                Sensación <strong className="text-on-surface font-semibold" id="hero-feels-like">{displayFeelsLike}°{unit}</strong>
               </span>
             </div>
           </div>
@@ -114,7 +110,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
           <div className="flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant">HUMEDAD</span>
             <span className="font-headline-md text-[20px] font-semibold text-on-surface" id="hero-humidity">
-              {humidityDisplay}%
+              {current.humidity}%
             </span>
           </div>
         </div>
@@ -125,7 +121,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
           <div className="flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant">VIENTO</span>
             <span className="font-headline-md text-[20px] font-semibold text-on-surface" id="hero-wind">
-              {windDisplay} km/h
+              {current.windSpeed} km/h
             </span>
           </div>
         </div>
@@ -136,7 +132,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
           <div className="flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant">PROBABILIDAD DE LLUVIA</span>
             <span className="font-headline-md text-[20px] font-semibold text-on-surface" id="hero-precip">
-              {precipDisplay}%
+              {today.precipitationProbability}%
             </span>
           </div>
         </div>
