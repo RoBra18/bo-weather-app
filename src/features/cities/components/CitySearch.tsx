@@ -30,13 +30,14 @@ export const CitySearch: FC<CitySearchProps> = ({
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5" id="cities-grid">
-        {allForecasts.map(({ city, forecast }) => {
+        {allForecasts.map(({ city, current }) => {
           const isSelected = city.id === selectedCityId;
-          const today = forecast && forecast.length > 0 ? forecast[0] : null;
 
-          const tempVal = today ? "max: "+formatTemp(today.maxTemp, unit) : '--';
-          const iconMeta = today ? getWeatherIconMeta(today.weatherCode) : { iconName: 'cloud', colorClass: 'text-primary' };
-          const conditionText = today ? today.weatherCondition.main : 'Sin datos';
+          const tempVal = current ? formatTemp(current.temp, unit) : '--';
+          const iconMeta = current
+            ? getWeatherIconMeta(current.weatherCode)
+            : { iconName: 'cloud', colorClass: 'text-primary' };
+          const conditionText = current ? current.weatherCondition.main : 'Sin datos';
 
           return (
             <button
