@@ -1,0 +1,10 @@
+/* Variables de diseño de la aplicación */
+:root {
+  --color-primary: #3b82f6;
+  --color-secondary: #0ea5e9;
+  --color-bg-dark: #0f172a;
+  --color-card-bg: rgba(255, 255, 255, 0.08);
+  --color-text-main: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --radius-lg: 1rem;
+}
