@@ -1,22 +1,20 @@
 /**
- * Tipos y modelos asociados al clima actual.
+ * Condición meteorológica legible mapeada desde el código WMO de Open-Meteo.
  */
 export interface WeatherCondition {
-  id: number;
+  code: number;
   main: string;
   description: string;
-  icon: string;
+  icon?: string;
 }
 
-export interface CurrentWeather {
-  cityId: string | number;
-  cityName: string;
-  temp: number;
-  feelsLike: number;
-  tempMin: number;
-  tempMax: number;
-  humidity: number;
-  windSpeed: number;
-  condition: WeatherCondition;
-  timestamp: number;
+/**
+ * Representación a nivel de aplicación del pronóstico diario de 7 días.
+ */
+export interface DailyForecast {
+  date: string;
+  maxTemp: number;
+  minTemp: number;
+  weatherCode: number;
+  weatherCondition: WeatherCondition;
 }
