@@ -17,4 +17,7 @@ export interface DailyForecast {
   minTemp: number;
   weatherCode: number;
   weatherCondition: WeatherCondition;
+  humidity?: number;
+  windSpeed?: number;
+  precipitationProbability?: number;
 }

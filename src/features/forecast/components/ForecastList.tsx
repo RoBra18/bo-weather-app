@@ -45,9 +45,8 @@ export const ForecastList: FC<ForecastListProps> = ({ cityForecast, unit }) => {
           const leftPct = Math.max(5, Math.min(80, Math.round(((dayItem.minTemp - overallMin) / tempRange) * 60)));
           const widthPct = Math.max(20, Math.min(100 - leftPct, Math.round(((dayItem.maxTemp - dayItem.minTemp) / tempRange) * 80)));
 
-          // Probabilidad de precipitación basada en el código de clima
-          const isHighRain = dayItem.weatherCode >= 80 || dayItem.weatherCode === 95 || dayItem.weatherCode === 96 || dayItem.weatherCode === 99;
-          const precipText = isHighRain ? '65%' : dayItem.weatherCode >= 50 ? '30%' : '10%';
+          const precipProbability = dayItem.precipitationProbability ?? 0;
+          const isHighRain = precipProbability >= 50;
 
           return (
             <div key={dayItem.date} className="py-3.5 flex items-center justify-between gap-4">
@@ -90,7 +89,7 @@ export const ForecastList: FC<ForecastListProps> = ({ cityForecast, unit }) => {
                 <span className="material-symbols-outlined text-[15px] text-primary">
                   {isHighRain ? 'thunderstorm' : 'rainy'}
                 </span>
-                <span>{precipText}</span>
+                <span>{precipProbability}%</span>
               </div>
             </div>
           );

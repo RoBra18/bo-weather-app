@@ -19,7 +19,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
     );
   }
 
-  const { city, forecast } = cityForecast;
+  const { city, forecast, currentHumidity, currentWindSpeed } = cityForecast;
   const today = forecast[0];
   const iconMeta = getWeatherIconMeta(today.weatherCode);
 
@@ -27,6 +27,10 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
   const displayMin = formatTemp(today.minTemp, unit);
   const currentEstimate = Math.round((displayMax + displayMin) / 2);
   const feelsLike = currentEstimate > 0 ? currentEstimate + 1 : currentEstimate;
+
+  const humidityDisplay = currentHumidity ?? today.humidity ?? 50;
+  const windDisplay = currentWindSpeed ?? today.windSpeed ?? 12;
+  const precipDisplay = today.precipitationProbability ?? 0;
 
   // Formato de fecha legible
   const dateFormatted = new Date().toLocaleDateString('es-BO', {
@@ -110,7 +114,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
           <div className="flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant">HUMEDAD</span>
             <span className="font-headline-md text-[20px] font-semibold text-on-surface" id="hero-humidity">
-              54%
+              {humidityDisplay}%
             </span>
           </div>
         </div>
@@ -121,7 +125,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
           <div className="flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant">VIENTO</span>
             <span className="font-headline-md text-[20px] font-semibold text-on-surface" id="hero-wind">
-              12 km/h
+              {windDisplay} km/h
             </span>
           </div>
         </div>
@@ -132,7 +136,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
           <div className="flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant">PROBABILIDAD DE LLUVIA</span>
             <span className="font-headline-md text-[20px] font-semibold text-on-surface" id="hero-precip">
-              {today.weatherCode >= 50 ? '60%' : '10%'}
+              {precipDisplay}%
             </span>
           </div>
         </div>

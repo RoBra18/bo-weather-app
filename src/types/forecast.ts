@@ -6,5 +6,7 @@ import type { DailyForecast } from './weather';
  */
 export interface CityWeatherForecast {
   city: City;
+  currentHumidity?: number;
+  currentWindSpeed?: number;
   forecast: DailyForecast[];
 }
