@@ -106,6 +106,10 @@ The goal was to keep the project understandable without introducing unnecessary 
 
 The application includes loading, empty, and error states
 
+### Git Workflow
+
+GitHub Flow was used to organize the development process, working with short-lived feature branches and pull requests before merging changes into the main branch. This kept the development history organized and made each feature easier to review.
+
 ### Scope and Simplicity
 
 Routing and state management libraries such as Redux were intentionally not used because they were not necessary for the scope of this application. Unit tests were not added because the application has a relatively small scope and simple logic, so adding a testing framework was considered unnecessary complexity for this challenge.
