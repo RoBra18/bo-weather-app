@@ -5,9 +5,6 @@ import type { CurrentWeather, DailyForecast } from '../../types/weather';
 import { httpClient } from './httpClient';
 import { mapWmoCodeToCondition } from './weatherCodeMapper';
 
-/**
- * Estructuras internas de respuesta cruda de la API de Open-Meteo.
- */
 interface OpenMeteoCurrentData {
   time?: string;
   temperature_2m: number;
@@ -32,9 +29,8 @@ interface OpenMeteoForecastResponse {
   daily?: OpenMeteoDailyData;
 }
 
-/**
- * Transforma la respuesta cruda de Open-Meteo en el modelo de dominio de la aplicación.
- * Mantiene la separación lógica entre el clima actual real y el pronóstico diario.
+/*
+ * Transform the OpenMeteo response to our business model.
  */
 function transformOpenMeteoResponse(city: City, raw: OpenMeteoForecastResponse): CityWeatherForecast {
   if (!raw || !raw.current || !raw.daily || !Array.isArray(raw.daily.time)) {
@@ -71,14 +67,10 @@ function transformOpenMeteoResponse(city: City, raw: OpenMeteoForecastResponse):
   return {
     city,
     current: currentWeather,
-    forecast,
-  };
+    forecast
+  }
 }
 
-/**
- * Obtiene el clima actual real y el pronóstico de los próximos 7 días para una lista de ciudades.
- * Utiliza los parámetros actuales (current) y diarios (daily) de Open-Meteo en una única consulta batch.
- */
 export async function getForecastForCities(cities: City[]): Promise<CityWeatherForecast[]> {
   if (!cities || cities.length === 0) {
     return [];
@@ -126,16 +118,12 @@ export async function getForecastForCities(cities: City[]): Promise<CityWeatherF
   });
 }
 
-/**
- * Obtiene el clima actual y el pronóstico de 7 días para las 9 ciudades capitales de Bolivia.
- */
+
 export async function getBoliviaCapitalsForecast(): Promise<CityWeatherForecast[]> {
   return getForecastForCities(BOLIVIA_CAPITAL_CITIES);
 }
 
-/**
- * Obtiene el clima actual y pronóstico para una ciudad individual.
- */
+
 export async function getForecastByCity(city: City): Promise<CityWeatherForecast> {
   const results = await getForecastForCities([city]);
   if (!results || results.length === 0) {

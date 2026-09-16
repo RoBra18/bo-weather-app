@@ -11,7 +11,7 @@ export const Header: FC<HeaderProps> = ({ unit, onUnitChange }) => {
       <div className="h-16 max-w-[1140px] mx-auto px-margin-mobile md:px-margin flex items-center justify-between gap-space-md">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center bg-primary-container text-on-primary">
-            <span className="material-symbols-outlined text-[26px]">partly_cloudy_day</span>
+            <span className="material-symbols-outlined text-[26px]" aria-hidden="true">partly_cloudy_day</span>
           </div>
           <div className="flex flex-col min-w-0">
             <span className="font-headline-md text-[18px] md:text-headline-md text-on-surface tracking-tight truncate font-bold">

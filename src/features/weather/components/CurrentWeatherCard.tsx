@@ -12,7 +12,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
     return (
       <section className="w-full bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-sm border border-surface-container-low flex items-center justify-center min-h-[300px]">
         <div className="flex flex-col items-center gap-3 text-on-surface-variant">
-          <span className="material-symbols-outlined text-[40px] animate-spin text-primary">sync</span>
+          <span className="material-symbols-outlined text-[40px] animate-spin text-primary" aria-hidden="true">sync</span>
           <span className="font-body-sm">Cargando información del clima...</span>
         </div>
       </section>
@@ -70,7 +70,11 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              <span className={`material-symbols-outlined text-[32px] ${iconMeta.colorClass}`} id="hero-condition-icon">
+              <span
+                className={`material-symbols-outlined text-[32px] ${iconMeta.colorClass}`}
+                id="hero-condition-icon"
+                aria-hidden="true"
+              >
                 {iconMeta.iconName}
               </span>
               <span className="font-headline-md text-headline-md text-on-surface" id="hero-condition-text">
@@ -79,12 +83,12 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
             </div>
             <div className="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
               <span className="inline-flex items-center gap-1">
-                <span className="material-symbols-outlined text-error text-[16px]">arrow_upward</span>
+                <span className="material-symbols-outlined text-error text-[16px]" aria-hidden="true">arrow_upward</span>
                 <span id="hero-high">{displayMax}°</span>
               </span>
               <span className="text-outline-variant">/</span>
               <span className="inline-flex items-center gap-1">
-                <span className="material-symbols-outlined text-primary text-[16px]">arrow_downward</span>
+                <span className="material-symbols-outlined text-primary text-[16px]" aria-hidden="true">arrow_downward</span>
                 <span id="hero-low">{displayMin}°</span>
               </span>
               <span className="mx-1 text-outline-variant">•</span>
@@ -95,9 +99,9 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
           </div>
         </div>
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container-low text-on-surface-variant text-body-sm self-start md:self-center">
-          <span className="material-symbols-outlined text-[#F59E0B] text-[20px]">wb_sunny</span>
+          <span className="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">schedule</span>
           <span>
-            Índice UV: <strong className="text-on-surface font-medium">Moderado (7.2)</strong>
+            Actualización: <strong className="text-on-surface font-medium">En tiempo real</strong>
           </span>
         </div>
       </div>
@@ -105,7 +109,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
         <div className="bg-surface-container-low/60 rounded-xl p-4 flex items-center gap-3.5">
           <div className="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm flex-shrink-0">
-            <span className="material-symbols-outlined text-[20px]">water_drop</span>
+            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">water_drop</span>
           </div>
           <div className="flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant">HUMEDAD</span>
@@ -116,7 +120,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
         </div>
         <div className="bg-surface-container-low/60 rounded-xl p-4 flex items-center gap-3.5">
           <div className="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm flex-shrink-0">
-            <span className="material-symbols-outlined text-[20px]">air</span>
+            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">air</span>
           </div>
           <div className="flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant">VIENTO</span>
@@ -127,7 +131,7 @@ export const CurrentWeatherCard: FC<CurrentWeatherCardProps> = ({ cityForecast, 
         </div>
         <div className="bg-surface-container-low/60 rounded-xl p-4 flex items-center gap-3.5">
           <div className="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm flex-shrink-0">
-            <span className="material-symbols-outlined text-[20px]">rainy</span>
+            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">rainy</span>
           </div>
           <div className="flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant">PROBABILIDAD DE LLUVIA</span>

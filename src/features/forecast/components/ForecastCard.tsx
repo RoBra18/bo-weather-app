@@ -47,7 +47,10 @@ export const ForecastCard: FC<ForecastCardProps> = ({
         >
           {dayInfo.label}
         </span>
-        <span className={`material-symbols-outlined text-[20px] ${iconMeta.colorClass}`}>
+        <span
+          className={`material-symbols-outlined text-[20px] ${iconMeta.colorClass}`}
+          aria-hidden="true"
+        >
           {iconMeta.iconName}
         </span>
         <span className="font-body-sm text-body-sm text-on-surface hidden md:inline truncate">
@@ -75,7 +78,7 @@ export const ForecastCard: FC<ForecastCardProps> = ({
           isHighRain ? 'text-primary font-semibold' : 'text-on-surface-variant'
         }`}
       >
-        <span className="material-symbols-outlined text-[15px] text-primary">
+        <span className="material-symbols-outlined text-[15px] text-primary" aria-hidden="true">
           {isHighRain ? 'thunderstorm' : 'rainy'}
         </span>
         <span>{precipProbability}%</span>

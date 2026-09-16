@@ -3,9 +3,6 @@ export interface IconMeta {
   colorClass: string;
 }
 
-/**
- * Mapea un código de clima WMO a un nombre de icono de Material Symbols Outlined y una clase de color.
- */
 export function getWeatherIconMeta(code: number): IconMeta {
   switch (code) {
     case 0:
@@ -48,9 +45,6 @@ export function getWeatherIconMeta(code: number): IconMeta {
   }
 }
 
-/**
- * Convierte grados Celsius a Fahrenheit según la unidad seleccionada.
- */
 export function formatTemp(celsius: number, unit: 'C' | 'F' = 'C'): number {
   if (unit === 'F') {
     return Math.round(celsius * 1.8 + 32);

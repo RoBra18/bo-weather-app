@@ -1,6 +1,3 @@
-/**
- * Tipos base para respuestas de API y estados de petición.
- */
 export interface ApiResponse<T> {
   data: T | null;
   error: string | null;

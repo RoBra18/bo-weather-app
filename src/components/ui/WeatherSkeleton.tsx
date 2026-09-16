@@ -1,10 +1,5 @@
 import type { FC } from 'react';
 
-/**
- * Skeleton loading component matching the main weather layout structure.
- * Features enhanced contrast tones (surface-container-highest / surface-container-high)
- * for clear visual feedback during data loading.
- */
 export const WeatherSkeleton: FC = () => {
   return (
     <div className="flex flex-col gap-10 animate-pulse w-full">

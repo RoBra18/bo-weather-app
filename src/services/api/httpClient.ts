@@ -3,10 +3,7 @@ import { ENV } from '../../config/env';
 export interface RequestOptions extends RequestInit {
   params?: Record<string, string | number | boolean | (string | number)[]>;
 }
-
-/**
- * Cliente HTTP genérico y aislado para realizar peticiones a APIs externas.
- */
+//GEneric HTTP client
 export async function httpClient<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
   const { params, ...fetchOptions } = options;
   const baseUrl = ENV.OPEN_METEO_BASE_URL;
@@ -38,16 +35,12 @@ export async function httpClient<T>(endpoint: string, options: RequestOptions = 
 
     if (!response.ok) {
       let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-      try {
         const errorData = await response.json();
         if (errorData?.reason) {
           errorMessage = errorData.reason;
         } else if (errorData?.message) {
           errorMessage = errorData.message;
         }
-      } catch {
-        // En caso de que el cuerpo de error no sea JSON válido
-      }
       throw new Error(`Open-Meteo API Error: ${errorMessage}`);
     }
 
