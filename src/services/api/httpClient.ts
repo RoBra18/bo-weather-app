@@ -38,16 +38,12 @@ export async function httpClient<T>(endpoint: string, options: RequestOptions = 
 
     if (!response.ok) {
       let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-      try {
         const errorData = await response.json();
         if (errorData?.reason) {
           errorMessage = errorData.reason;
         } else if (errorData?.message) {
           errorMessage = errorData.message;
         }
-      } catch {
-        // En caso de que el cuerpo de error no sea JSON válido
-      }
       throw new Error(`Open-Meteo API Error: ${errorMessage}`);
     }
 

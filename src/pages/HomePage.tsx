@@ -42,7 +42,7 @@ export const HomePage: FC = () => {
           {error && data && data.length > 0 && (
             <div className="w-full bg-error-container/30 border border-error/30 rounded-xl p-4 flex items-center justify-between gap-4 text-on-surface">
               <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-error text-[22px]">warning</span>
+                <span className="material-symbols-outlined text-error text-[22px]" aria-hidden="true">warning</span>
                 <span className="font-body-sm text-body-sm">{userFriendlyErrorMsg}</span>
               </div>
               <button

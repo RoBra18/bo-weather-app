@@ -44,10 +44,11 @@ export const CitySearch: FC<CitySearchProps> = ({
               key={city.id}
               type="button"
               id={`card-${city.id}`}
+              aria-pressed={isSelected}
               onClick={() => onSelectCity(city.id)}
               className={`city-selector-card text-left transition-all rounded-xl p-4 shadow-sm flex items-center justify-between cursor-pointer group ${
                 isSelected
-                  ? 'bg-surface-container-lowest border-2 border-primary bg-primary-fixed/10 ring-2 ring-primary'
+                  ? 'bg-surface-container-lowest border-2 border-primary bg-primary-fixed/10'
                   : 'bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container-low'
               }`}
             >
@@ -70,7 +71,10 @@ export const CitySearch: FC<CitySearchProps> = ({
                 <span className="font-metric-tabular text-on-surface text-[20px] font-bold">
                   {tempVal}°{unit}
                 </span>
-                <span className={`material-symbols-outlined text-[22px] ${iconMeta.colorClass}`}>
+                <span
+                  className={`material-symbols-outlined text-[22px] ${iconMeta.colorClass}`}
+                  aria-hidden="true"
+                >
                   {iconMeta.iconName}
                 </span>
               </div>
