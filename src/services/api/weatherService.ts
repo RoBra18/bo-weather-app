@@ -5,9 +5,6 @@ import type { CurrentWeather, DailyForecast } from '../../types/weather';
 import { httpClient } from './httpClient';
 import { mapWmoCodeToCondition } from './weatherCodeMapper';
 
-/**
- * Estructuras internas de respuesta cruda de la API de Open-Meteo.
- */
 interface OpenMeteoCurrentData {
   time?: string;
   temperature_2m: number;
@@ -32,7 +29,7 @@ interface OpenMeteoForecastResponse {
   daily?: OpenMeteoDailyData;
 }
 
-/**
+/*
  * Transform the OpenMeteo response to our business model.
  */
 function transformOpenMeteoResponse(city: City, raw: OpenMeteoForecastResponse): CityWeatherForecast {
@@ -70,8 +67,8 @@ function transformOpenMeteoResponse(city: City, raw: OpenMeteoForecastResponse):
   return {
     city,
     current: currentWeather,
-    forecast,
-  };
+    forecast
+  }
 }
 
 export async function getForecastForCities(cities: City[]): Promise<CityWeatherForecast[]> {

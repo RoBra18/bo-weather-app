@@ -43,20 +43,25 @@ export function useCityForecast(city: City | null) {
     setLoading(true);
     setError(null);
 
-    getForecastByCity(city)
-      .then((res) => {
+    const fetchForecast = async () => {
+      try {
+        const res = await getForecastByCity(city);
         if (isMounted) {
           setForecast(res);
-          setLoading(false);
         }
-      })
-      .catch((err: unknown) => {
+      } catch (err: unknown) {
         if (isMounted) {
           const msg = err instanceof Error ? err.message : 'Error al obtener el pronóstico';
           setError(msg);
+        }
+      } finally {
+        if (isMounted) {
           setLoading(false);
         }
-      });
+      }
+    };
+
+    fetchForecast();
 
     return () => {
       isMounted = false;
