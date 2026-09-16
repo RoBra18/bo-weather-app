@@ -161,6 +161,8 @@ The AI also initially used default or hardcoded values for some weather details,
 
 Another implementation detail that was changed was the use of `.then()` syntax in some API-related code, which was refactored to `async/await` for consistency with the rest of the implementation.
 
+Also, the forecast list initially rendered all forecast-day content directly within the list component. This was refactored to use a reusable ForecastCard component, improving separation of concerns and making the forecast item easier to maintain and reuse.
+
 These examples were identified through code review and testing rather than being accepted directly from the AI.
 
 ### What Required the Most Reasoning
