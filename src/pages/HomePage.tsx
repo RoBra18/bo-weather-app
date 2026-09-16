@@ -31,14 +31,11 @@ export const HomePage: FC = () => {
 
   return (
     <div className="bg-background font-body-md text-on-surface min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
-      {/* Header bar with unit selector */}
       <Header unit={unit} onUnitChange={setUnit} />
 
-      {/* Main page content container */}
       <main className="w-full pt-16 flex-1 bg-surface">
         <div className="max-w-[1140px] mx-auto px-margin-mobile md:px-margin py-8 md:py-12 flex flex-col gap-10">
           
-          {/* Subtle error banner when refetching fails while previous data is visible */}
           {error && data && data.length > 0 && (
             <div className="w-full bg-error-container/30 border border-error/30 rounded-xl p-4 flex items-center justify-between gap-4 text-on-surface">
               <div className="flex items-center gap-3">
@@ -55,7 +52,6 @@ export const HomePage: FC = () => {
             </div>
           )}
 
-          {/* Conditional rendering based on data state */}
           {loading && (!data || data.length === 0) ? (
             <WeatherSkeleton />
           ) : error && (!data || data.length === 0) ? (
@@ -64,10 +60,8 @@ export const HomePage: FC = () => {
             <EmptyState onRetry={refetch} />
           ) : (
             <>
-              {/* Hero card showing selected city current weather */}
               <CurrentWeatherCard cityForecast={selectedForecast} unit={unit} />
 
-              {/* Departmental capitals selector grid */}
               <CitySearch
                 allForecasts={data}
                 selectedCityId={selectedCityId}
@@ -75,14 +69,12 @@ export const HomePage: FC = () => {
                 unit={unit}
               />
 
-              {/* 7-day extended forecast list */}
               <ForecastList cityForecast={selectedForecast} unit={unit} />
             </>
           )}
         </div>
       </main>
 
-      {/* Footer bar */}
       <Footer />
     </div>
   );

@@ -1,6 +1,3 @@
-/**
- * Utility to map raw technical/API error messages into short, user-friendly messages.
- */
 export function mapUserFriendlyErrorMessage(error: string | Error | null | undefined): string {
   if (!error) {
     return 'Ha ocurrido un problema inesperado al cargar la información del clima.';

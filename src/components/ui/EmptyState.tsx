@@ -4,9 +4,7 @@ export interface EmptyStateProps {
   onRetry?: () => void;
 }
 
-/**
- * Empty state component rendered when no weather data is available.
- */
+
 export const EmptyState: FC<EmptyStateProps> = ({ onRetry }) => {
   return (
     <section className="w-full bg-surface-container-lowest rounded-2xl p-8 md:p-12 shadow-sm border border-surface-container-low flex flex-col items-center text-center gap-5 my-6">

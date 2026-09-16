@@ -1,6 +1,3 @@
-/**
- * Tipos y modelos de ciudades y geolocalización.
- */
 export interface City {
   id: string;
   name: string;

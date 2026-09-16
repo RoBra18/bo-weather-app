@@ -1,8 +1,5 @@
 import type { City } from '../types/city';
 
-/**
- * Las 9 ciudades capitales de los departamentos de Bolivia con sus coordenadas.
- */
 export const BOLIVIA_CAPITAL_CITIES: City[] = [
   {
     id: 'la-paz',

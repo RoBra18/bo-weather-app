@@ -3,10 +3,7 @@ import { ENV } from '../../config/env';
 export interface RequestOptions extends RequestInit {
   params?: Record<string, string | number | boolean | (string | number)[]>;
 }
-
-/**
- * Cliente HTTP genérico y aislado para realizar peticiones a APIs externas.
- */
+//GEneric HTTP client
 export async function httpClient<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
   const { params, ...fetchOptions } = options;
   const baseUrl = ENV.OPEN_METEO_BASE_URL;

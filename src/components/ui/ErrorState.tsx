@@ -5,10 +5,6 @@ export interface ErrorStateProps {
   onRetry?: () => void;
 }
 
-/**
- * User-friendly Error State component displayed when an API or network request fails.
- * Includes a Retry button to allow recovering without leaving the UI frozen.
- */
 export const ErrorState: FC<ErrorStateProps> = ({ message, onRetry }) => {
   return (
     <section className="w-full bg-surface-container-lowest rounded-2xl p-8 md:p-12 shadow-sm border border-error/20 flex flex-col items-center text-center gap-5 my-6">

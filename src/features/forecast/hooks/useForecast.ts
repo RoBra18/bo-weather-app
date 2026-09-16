@@ -3,9 +3,7 @@ import { getBoliviaCapitalsForecast, getForecastByCity } from '../../../services
 import type { City } from '../../../types/city';
 import type { CityWeatherForecast } from '../../../types/forecast';
 
-/**
- * Hook para consultar el pronóstico de 7 días de las 9 ciudades capitales de Bolivia.
- */
+
 export function useBoliviaForecast() {
   const [data, setData] = useState<CityWeatherForecast[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -32,9 +30,7 @@ export function useBoliviaForecast() {
   return { data, loading, error, refetch: fetchForecast };
 }
 
-/**
- * Hook para consultar el pronóstico de una ciudad específica.
- */
+
 export function useCityForecast(city: City | null) {
   const [forecast, setForecast] = useState<CityWeatherForecast | null>(null);
   const [loading, setLoading] = useState<boolean>(false);

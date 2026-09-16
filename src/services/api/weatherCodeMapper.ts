@@ -1,7 +1,7 @@
 import type { WeatherCondition } from '../../types/weather';
 
 /**
- * Mapea los códigos de clima WMO de Open-Meteo a condiciones meteorológicas legibles.
+ * mapping WMO codes of Open-Meteo to readable data.
  */
 export function mapWmoCodeToCondition(code: number): WeatherCondition {
   switch (code) {

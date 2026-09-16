@@ -9,9 +9,6 @@ export interface CitySearchProps {
   unit: 'C' | 'F';
 }
 
-/**
- * Grilla interactiva de las 9 ciudades capitales de Bolivia.
- */
 export const CitySearch: FC<CitySearchProps> = ({
   allForecasts,
   selectedCityId,
